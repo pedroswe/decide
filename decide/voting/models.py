@@ -27,6 +27,9 @@ class QuestionOption(models.Model):
     def __str__(self):
         return '{} ({})'.format(self.option, self.number)
 
+    class Meta:
+        unique_together = ('question', 'number')
+
 
 class Voting(models.Model):
     name = models.CharField(max_length=200)
