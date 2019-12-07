@@ -6,6 +6,8 @@ from django.dispatch import receiver
 from base import mods
 from base.models import Auth, Key
 
+import pandas as pd
+
 
 class Question(models.Model):
     desc = models.TextField()
@@ -124,3 +126,24 @@ class Voting(models.Model):
 
     def __str__(self):
         return self.name
+
+    def checkInputFile(self,filePath):
+        file = pd.read_excel(filePath,sheet_name = 'Hoja1')
+
+        columns_names = ['Nombre', 'Primer Apellido', 'Segundo Apellido', 'Sexo', 'Provincia', 'Partido Político', 'Proceso Primarias']
+
+        # Comprobación número columnas
+        if len(file.columns)!=7:
+            raise AssertionError()
+
+        # Comprobación nombres de columnas
+        if (columns_names!=file.columns).all():
+            raise AssertionError()
+
+        # for row in file.iterrows():
+            # Comprobación proceso primarias
+            # Comprobación provincias
+            # Comprobación 6 candidatos/provincia
+            # Comprobación relación 1/2
+
+
