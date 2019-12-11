@@ -45,12 +45,14 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     'gateway',
 
-    'django.contrib.sites', # new
+    # Apps needed fod SocialAuth branch
+    'django.contrib.sites',
 
-    'allauth', # new
-    'allauth.account', # new
-    'allauth.socialaccount', # new
-    'allauth.socialaccount.providers.github', # new
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
+    #################################################
 ]
 
 REST_FRAMEWORK = {
@@ -63,13 +65,20 @@ REST_FRAMEWORK = {
 
 AUTHENTICATION_BACKENDS = [
     'base.backends.AuthBackend',
+
+    # Needed for SocialAuth branch
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
+    #################################################
 ]
 
 SITE_ID = 1
 
+# Used for Login and Social Auth branches
 LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+#################################################
+
 
 MODULES = [
     'authentication',
@@ -100,6 +109,7 @@ ROOT_URLCONF = 'decide.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # Añadido para que Django encuentre los templates para las nuevas páginas html creadas
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {

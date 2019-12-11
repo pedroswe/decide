@@ -18,6 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework_swagger.views import get_swagger_view
 
+# Needed for Login branch
+from django.views.generic.base import TemplateView
+#########################################################
+
+
 from . import views
 
 
@@ -27,8 +32,15 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('doc/', schema_view),
     path('gateway/', include('gateway.urls')),
-    path('decide_dialga/', include('allauth.urls')),
-    path('', views.Home.as_view(), name='home'),
+
+    # SocialAuth branch changes
+    path('accounts/', include('allauth.urls')),
+    #########################################################
+
+    # Login branch changes
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('', TemplateView.as_view(template_name='home.html'), name='home'),
+    #########################################################
 ]
 
 for module in settings.MODULES:

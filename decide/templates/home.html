@@ -1,8 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
 {% load socialaccount %}
 
-<h1>Django Social Authentication</h1>
+{% block content %}
+
+<h1>Decide Dialga Home Page</h1>
+
+<h2>You are using the Decide Dialga system. Feel free to explore it!!!</h2>
+
 {% if user.is_authenticated %}
-<p>Welcome {{ user.username }} !!!</p>
+<h3>Welcome {{ user.username }} !!!</h3>
+
+<p>You can logout using the next link</p>
+<p><a href="{% url 'logout' %}">Logout</a></p>
 {% else %}
-<a href="{% provider_login_url 'github' %}">Sign Up</a>
+
+<p>You are not logged in</p>
+<p>You have different options to log in</p>
+
+<p>Log in with your username and password</p>
+<a href="{% url 'login' %}">Login</a>
+
+<p>Log in with your GitHub account</p>
+<a href="{% provider_login_url 'github' %}" class="btn">Login using GitHub</a>
+<!--<a href="{% provider_login_url 'github' %}">Login using GitHub</a>-->
+
 {% endif %}
+{% endblock %}
