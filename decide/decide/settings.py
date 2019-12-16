@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.facebook',
     #################################################
 ]
 
@@ -72,11 +73,11 @@ AUTHENTICATION_BACKENDS = [
     #################################################
 ]
 
-SITE_ID = 1
+SITE_ID = 2  # Cuidado con el id, viene de la bd
 
 # Used for Login and Social Auth branches
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
 #################################################
 
 
@@ -109,8 +110,7 @@ ROOT_URLCONF = 'decide.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # Añadido para que Django encuentre los templates para las nuevas páginas html creadas
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -180,6 +180,18 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = ''
+
+STATICFILES_DIRS = (
+    'static',
+)
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = ''
+
+MEDIAFILES_DIRS = (
+    'media',
+)
 
 # number of bits for the key, all auths should use the same number of bits
 KEYBITS = 256
@@ -203,3 +215,5 @@ if os.path.exists("config.jsonnet"):
 
 
 INSTALLED_APPS = INSTALLED_APPS + MODULES
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

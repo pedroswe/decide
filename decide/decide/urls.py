@@ -13,17 +13,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf import settings
+# from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
-from rest_framework_swagger.views import get_swagger_view
-
+from django.urls import include, path
 # Needed for Login branch
 from django.views.generic.base import TemplateView
+from rest_framework_swagger.views import get_swagger_view
+
+from . import settings
+
 #########################################################
-
-
-from . import views
 
 
 schema_view = get_swagger_view(title='Decide API')
@@ -38,10 +38,16 @@ urlpatterns = [
     #########################################################
 
     # Login branch changes
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('', TemplateView.as_view(template_name='home.html'), name='home'),
+    # path('accounts/', include('django.contrib.auth.urls')),
+    # path('', TemplateView.as_view(template_name='home.html'), name='home'),
+    path('', TemplateView.as_view(template_name='base.html'), name="index"),
+    path('accounts/', include('allauth.urls')),
+    path('accounts/profile/',
+         TemplateView.as_view(template_name='profile.html')),
     #########################################################
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
+    + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 for module in settings.MODULES:
     urlpatterns += [
