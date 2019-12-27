@@ -55,16 +55,16 @@ before_deploy:
   - export GIT_TAG=v$MILESTONE_TRAVIS.0.$TRAVIS_BUILD_NUMBER-$YEAR
   - git tag -a $GIT_TAG -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
 
-deploy:
-  provider: releases
-  api-key:
-    secure: $TOKEN_TRAVIS
-  file: "./$NOMBRE_ZIP.zip"
-  skip_cleanup: true
-  on:
-    branch: $RAMA_TRAVIS
-    condition: $DEPLOY_TRAVIS = 1
-    tags: false
+# deploy:
+#  provider: releases
+#  api-key:
+#    secure: $TOKEN_TRAVIS
+#  file: "./$NOMBRE_ZIP.zip"
+#  skip_cleanup: true
+#  on:
+#    branch: $RAMA_TRAVIS
+#    condition: $DEPLOY_TRAVIS = 1
+#    tags: false
 
-notifications:
-  email: false
+# notifications:
+#  email: false
