@@ -66,5 +66,5 @@ deploy:
     condition: $DEPLOY_TRAVIS = 1
     tags: false
 
- notifications:
+notifications:
   email: false
