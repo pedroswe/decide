@@ -21,7 +21,8 @@ services:
   - postgresql
 
 addons:
-  - postgresql: 9.4
+  - postgresql: 
+     - 9.4
 
 before_script:
   - psql -U postgres -c "create user decide password 'decide'"
@@ -58,7 +59,6 @@ before_deploy:
 #  - cd decide
 #  - cp travis_settings.py settings.py
 #  - python ./manage.py test --keepdb
-
 deploy:
   - provider: releases
       api-key:
@@ -73,6 +73,5 @@ deploy:
 #    strategy: git
 #    api_key:
 #      secure: $HEROKU_API_KEY
-
 notifications:
   email: false
