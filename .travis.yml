@@ -52,7 +52,7 @@ before_deploy:
   - git config --local user.name $USER_TRAVIS
   - git config --local user.email $EMAIL_TRAVIS
   - export YEAR=`date +"%Y"`  
-  - export GIT_TAG=v$MILESTONE_TRAVIS.0.$TRAVIS_BUILD_NUMBER-$YEAR
+  - export GIT_TAG=M$MILESTONE_TRAVIS-build.$TRAVIS_BUILD_NUMBER-$YEAR
   - git tag -a $GIT_TAG -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
 
 deploy:
@@ -65,6 +65,10 @@ deploy:
     branch: $RAMA_TRAVIS
     condition: $DEPLOY_TRAVIS = 1
     tags: false
-
+  
+  provider: heroku
+  api_key:
+    secure: $HEROKU_API_KEY
+    
 notifications:
   email: false
