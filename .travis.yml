@@ -57,7 +57,7 @@ before_deploy:
   - export GIT_TAG=M$MILESTONE_TRAVIS-build.$TRAVIS_BUILD_NUMBER-$YEAR
   - git tag -a $GIT_TAG -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
 
-deploy:
+after_deploy:
   - provider: releases
     api-key:
       secure: $TOKEN_TRAVIS
@@ -67,6 +67,8 @@ deploy:
       branch: $RAMA_TRAVIS
       condition: $DEPLOY_TRAVIS = 1
       tags: false
+
+deploy:
   - provider: heroku
     app: $HEROKU_APP_NAME
     strategy: git
