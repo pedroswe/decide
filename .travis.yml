@@ -47,8 +47,10 @@ script:
 #  - python ./decide/manage.py makemigrations
 #  - python ./decide/manage.py migrate
 #  - python ./decide/manage.py compilemessages
-#  - python ./decide/manage.py test ./decide
+  - python ./manage.py test --keepdb
   - if [[ $TRAVIS_BRANCH == $RAMA_TRAVIS ]] && [[ $DEPLOY_TRAVIS == "1" ]]; then git archive --format zip --output ./$NOMBRE_ZIP.zip $RAMA_TRAVIS; echo "Zip generado correctamente."; fi
+  - cp travis_local_settings.py local_settings.py
+  - cp ./decide/travis_settings.py ./decide/settings.py
 
 before_deploy:
   - git config --local user.name $USER_TRAVIS
@@ -57,6 +59,13 @@ before_deploy:
   - export GIT_TAG=M$MILESTONE_TRAVIS-build.$TRAVIS_BUILD_NUMBER-$YEAR
   - git tag -a $GIT_TAG -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
 
+deploy:
+  - provider: heroku
+    app: $HEROKU_APP_NAME
+    strategy: git
+    api_key:
+      secure: $HEROKU_API_KEY
+   
 after_deploy:
   - provider: releases
     api-key:
@@ -68,12 +77,5 @@ after_deploy:
       condition: $DEPLOY_TRAVIS = 1
       tags: false
 
-deploy:
-  - provider: heroku
-    app: $HEROKU_APP_NAME
-    strategy: git
-    api_key:
-      secure: $HEROKU_API_KEY
-    
 notifications:
   email: false
