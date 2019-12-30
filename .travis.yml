@@ -43,7 +43,7 @@ script:
   - coverage run --branch --source=. ./manage.py test --keepdb --with-xunit
   - coverage xml
   - python-codacy-coverage -r coverage.xml
-  - flake8 . 
+  - flake8 --select E501,E265 .
 #  - python ./decide/manage.py makemigrations
 #  - python ./decide/manage.py migrate
 #  - python ./decide/manage.py compilemessages
@@ -67,10 +67,11 @@ deploy:
     branch: $RAMA_TRAVIS
     condition: $DEPLOY_TRAVIS = 1
     tags: false
-  
-  provider: heroku
-  api_key:
-    secure: $HEROKU_API_KEY
+
+#deploy:
+#  provider: heroku
+#  api_key:
+#    secure: $HEROKU_API_KEY
     
 notifications:
   email: false
