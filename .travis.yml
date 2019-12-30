@@ -70,7 +70,7 @@ deploy:
     on:
       branch: $RAMA_TRAVIS
       condition: $DEPLOY_TRAVIS = 1
-      tags: true
+      tags: false
   - provider: heroku
     app: $HEROKU_APP_NAME
     strategy: git
