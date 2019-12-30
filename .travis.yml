@@ -43,7 +43,7 @@ script:
   - coverage run --branch --source=. ./manage.py test --keepdb --with-xunit
   - coverage xml
   - python-codacy-coverage -r coverage.xml
-  - flake8 --select E501,E265 .
+  - flake8 --select E501,E265 . --exit-zero
 #  - python ./decide/manage.py makemigrations
 #  - python ./decide/manage.py migrate
 #  - python ./decide/manage.py compilemessages
@@ -58,20 +58,18 @@ before_deploy:
   - git tag -a $GIT_TAG -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
 
 deploy:
-  provider: releases
-  api-key:
-    secure: $TOKEN_TRAVIS
-  file: "./$NOMBRE_ZIP.zip"
-  skip_cleanup: true
-  on:
-    branch: $RAMA_TRAVIS
-    condition: $DEPLOY_TRAVIS = 1
-    tags: false
-
-#deploy:
-#  provider: heroku
-#  api_key:
-#    secure: $HEROKU_API_KEY
+  - provider: releases
+    api-key:
+      secure: $TOKEN_TRAVIS
+    file: "./$NOMBRE_ZIP.zip"
+    skip_cleanup: true
+    on:
+      branch: $RAMA_TRAVIS
+      condition: $DEPLOY_TRAVIS = 1
+      tags: false
+  - provider: heroku
+    api_key:
+      secure: $HEROKU_API_KEY
     
 notifications:
   email: false
