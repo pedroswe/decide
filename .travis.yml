@@ -66,12 +66,13 @@ deploy:
     on:
       branch: $RAMA_TRAVIS
       condition: $DEPLOY_TRAVIS = 1
-      tags: false
+      tags: true
   - provider: heroku
     app: $HEROKU_APP_NAME
     strategy: git
     api_key:
       secure: $HEROKU_API_KEY
+    skip_cleanup: true
     
 notifications:
   email: false
