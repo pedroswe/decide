@@ -77,9 +77,6 @@ deploy:
     api_key:
       secure: $HEROKU_API_KEY
     skip_cleanup: true
-    script:
-      - heroku config:set DISABLE_COLLECTSTATIC=1
-  
 
 notifications:
   email: false
