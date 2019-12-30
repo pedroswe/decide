@@ -15,15 +15,13 @@ language: python
 python:
   - 3.6
 
-sudo: required
-
 dist: xenial
 
 services:
   - postgresql
 
 addons:
-  - postgresql: "9.4"
+  - postgresql: 9.4
 
 before_script:
   - psql -U postgres -c "create user decide password 'decide'"
@@ -66,7 +64,6 @@ deploy:
       api-key:
         secure: $TOKEN_TRAVIS
       file: "./$NOMBRE_ZIP.zip"
-      skip_cleanup: true
       on:
         branch: $RAMA_TRAVIS
         condition: $DEPLOY_TRAVIS = 1
