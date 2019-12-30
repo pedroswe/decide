@@ -76,7 +76,6 @@ deploy:
     strategy: git
     api_key:
       secure: $HEROKU_API_KEY
-    skip_cleanup: true
 
 notifications:
   email: false
