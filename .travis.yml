@@ -44,7 +44,7 @@ script:
   - coverage xml
   - python-codacy-coverage -r coverage.xml
   - flake8 . 
-#  - python ./decide/manage.py makemigrations
+#  - python ./decide/manage.py makemigrations 
 #  - python ./decide/manage.py migrate
 #  - python ./decide/manage.py compilemessages
 #  - python ./decide/manage.py test ./decide
