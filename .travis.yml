@@ -8,6 +8,8 @@
 ## NOMBRE_ZIP ---------> decide                            #
 ## RAMA_TRAVIS --------> master                            #
 ## TOKEN_TRAVIS -------> token personal sin encriptar      #
+## HEROKU_APP_NAME ----> nombre de la app en heroku        #
+## HEROKU_API_KEY -----> api key de heroku del usuario     #
 ############################################################
 
 language: python
