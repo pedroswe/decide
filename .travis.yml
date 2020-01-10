@@ -77,6 +77,9 @@ jobs:
             condition: $DEPLOY_TRAVIS = 1
             tags: false
     - stage: "Deploy to Heroku"
+      before_deploy:
+        - git config --local user.name $USER_TRAVIS
+        - git config --local user.email $EMAIL_TRAVIS
       deploy:  
           provider: heroku
           app: $HEROKU_APP_NAME
