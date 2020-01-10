@@ -61,15 +61,15 @@ before_deploy:
 #  - cp travis_settings.py settings.py
 #  - python ./manage.py test --keepdb
 deploy:
-  - provider: releases
-    api-key:
-      secure: $TOKEN_TRAVIS
-    file: "./$NOMBRE_ZIP.zip"
-    on:
-      branch: $RAMA_TRAVIS
-      condition: $DEPLOY_TRAVIS = 1
-      tags: false
-  - provider: heroku
+  # - provider: releases
+  #   api-key:
+  #     secure: $TOKEN_TRAVIS
+  #   file: "./$NOMBRE_ZIP.zip"
+  #   on:
+  #     branch: $RAMA_TRAVIS
+  #     condition: $DEPLOY_TRAVIS = 1
+  #     tags: false
+    provider: heroku
     app: $HEROKU_APP_NAME
     strategy: git
     api_key:
