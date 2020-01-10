@@ -43,7 +43,7 @@ script:
   - coverage run --branch --source=. ./manage.py test --keepdb --with-xunit
   - coverage xml
   - python-codacy-coverage -r coverage.xml
-  - flake8 --select E501,E265 . --exit-zero
+  - flake8 --select E501,E265 . --exit-zero --exclude .git,__pycache__,docs/source/conf.py,old,build,dist,./mixnet/migrations/,./base/migrations/,./store/migrations/,./census/migrations/
 #  - python ./decide/manage.py makemigrations
 #  - python ./decide/manage.py migrate
 #  - python ./decide/manage.py compilemessages
