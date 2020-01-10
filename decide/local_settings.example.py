@@ -15,21 +15,21 @@ MODULES = [
 
 APIS = {
     'authentication': BASEURL,
-    'base': BASEURL,
-    'booth': BASEURL,
-    'census': BASEURL,
-    'mixnet': BASEURL,
-    'postproc': BASEURL,
-    'store': BASEURL,
-    'visualizer': BASEURL,
-    'voting': BASEURL,
+    'base': BASEDIR,
+    'booth': BASEDIR,
+    'census': BASEDIR,
+    'mixnet': BASEDIR,
+    'postproc': BASEDIR,
+    'store': BASEDIR,
+    'visualizer': BASEDIR,
+    'voting': BASEDIR,
 }
 
-BASEURL = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-STATIC_ROOT = os.path.join(BASEURL, 'staticfiles')
+BASEDIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+STATIC_ROOT = os.path.join(BASEDIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(BASEURL, 'static'),
+    os.path.join(BASEDIR, 'static'),
 
 DATABASES = {
     'default': {
@@ -42,4 +42,4 @@ DATABASES = {
 }
 
 # number of bits for the key, all auths should use the same number of bits
-KEYBITS = 256
+KEYBITS = 128
