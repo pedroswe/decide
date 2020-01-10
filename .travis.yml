@@ -81,6 +81,14 @@ jobs:
       branches:
           only:
           - master
+      install:
+        - pip install -r requirements.txt
+        - pip install codacy-coverage
+        - pip install flake8
+      before_script:
+        - psql -U postgres -c "create user decide password 'decide'"
+        - psql -U postgres -c "create database test_decide owner decide"
+        - psql -U postgres -c "ALTER USER decide CREATEDB"
       before_deploy:
         - git config --local user.name $USER_TRAVIS
         - git config --local user.email $EMAIL_TRAVIS
