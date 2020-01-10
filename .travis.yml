@@ -85,7 +85,7 @@ jobs:
         - pip install -r requirements.txt
         - pip install codacy-coverage
         - pip install flake8
-      before_script:
+      script:
         - psql -U postgres -c "create user decide password 'decide'"
         - psql -U postgres -c "create database test_decide owner decide"
         - psql -U postgres -c "ALTER USER decide CREATEDB"
