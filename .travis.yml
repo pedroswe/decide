@@ -81,14 +81,8 @@ jobs:
       branches:
           only:
           - master
-      install:
-        - pip install -r requirements.txt
-        - pip install codacy-coverage
-        - pip install flake8
       script:
-        - psql -U postgres -c "create user decide password 'decide'"
-        - psql -U postgres -c "create database test_decide owner decide"
-        - psql -U postgres -c "ALTER USER decide CREATEDB"
+        - if [[ $TRAVIS_BRANCH == $RAMA_TRAVIS ]] && [[ $DEPLOY_TRAVIS == "1" ]]; then git archive --format zip --output ./$NOMBRE_ZIP.zip $RAMA_TRAVIS; echo "Zip generado correctamente."; fi
       before_deploy:
         - git config --local user.name $USER_TRAVIS
         - git config --local user.email $EMAIL_TRAVIS
