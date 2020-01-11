@@ -95,8 +95,8 @@ jobs:
           app: $HEROKU_APP_NAME
           on: 
             branch: $RAMA_TRAVIS
-            condition: $DEPLOY_TRAVIS = 1 
+            condition: $DEPLOY_TRAVIS = 1
+            tags: false
           api_key:
             secure: $HEROKU_API_KEY
-          skip_cleanup: true
 
