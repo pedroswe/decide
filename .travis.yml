@@ -80,9 +80,9 @@ jobs:
       branches:
           only:
           - master
-      # script:
-      #   - cd decide
-      #   - cp decide/settings.py ./local_settings.py
+      script:
+        - cd decide
+        - cp decide/settings.py ./local_settings.py
       before_deploy:
         - git config --local user.name $USER_TRAVIS
         - git config --local user.email $EMAIL_TRAVIS
