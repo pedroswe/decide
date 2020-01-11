@@ -86,7 +86,7 @@ jobs:
         - cd decide
         - cp travis_local_settings.py local_settings.py
         - cd decide
-        - cp travis_settings.py settings.py
+        - cp -f travis_settings.py settings.py
       before_deploy:
         - git config --local user.name $USER_TRAVIS
         - git config --local user.email $EMAIL_TRAVIS
