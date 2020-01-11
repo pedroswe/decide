@@ -39,7 +39,7 @@ jobs:
         - pip install flake8
       before_script:
         - psql -U postgres -c "create user decide password 'decide'"
-        - psql -U postgres -c "create database test_decide owner decide"
+        - psql -U postgres -c "create database decide owner decide"
         - psql -U postgres -c "ALTER USER decide CREATEDB"
       script:
         - cd decide
