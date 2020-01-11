@@ -84,6 +84,7 @@ jobs:
       script:
         - cd decide
         - cp decide/settings.py local_settings.py
+        - python decide/manage.py collectstatic --noinput
        # - if [[ $TRAVIS_BRANCH == $RAMA_TRAVIS ]] && [[ $DEPLOY_TRAVIS == "1" ]]; then git archive --format zip --output ./$NOMBRE_ZIP.zip $RAMA_TRAVIS; echo "Zip generado correctamente."; fi
       before_deploy:
         - git config --local user.name $USER_TRAVIS
