@@ -32,57 +32,58 @@ env:
 
 jobs:
   include:
-    - stage: "Running tests"
-      install:
-        - pip install -r requirements.txt
-        - pip install codacy-coverage
-        - pip install flake8
-      before_script:
-        - psql -U postgres -c "create user decide password 'decide'"
-        - psql -U postgres -c "create database test_decide owner decide"
-        - psql -U postgres -c "ALTER USER decide CREATEDB"
-      script:
-        - cd decide
-        - coverage run --branch --source=. ./manage.py test --keepdb --with-xunit
-        - coverage xml
-        - python-codacy-coverage -r coverage.xml
-        - flake8 --select E501,E265,E225 . --exit-zero --exclude .git,__pycache__,docs/source/conf.py,old,build,dist,./mixnet/migrations/,./base/migrations/,./store/migrations/,./census/migrations/,./voting/migrations/
-#  - python ./decide/manage.py makemigrations
-#  - python ./decide/manage.py migrate
-#  - python ./decide/manage.py compilemessages
-#  - python ./decide/manage.py test ./decide
+#     - stage: "Running tests"
+#       install:
+#         - pip install -r requirements.txt
+#         - pip install codacy-coverage
+#         - pip install flake8
+#       before_script:
+#         - psql -U postgres -c "create user decide password 'decide'"
+#         - psql -U postgres -c "create database test_decide owner decide"
+#         - psql -U postgres -c "ALTER USER decide CREATEDB"
+#       script:
+#         - cd decide
+#         - coverage run --branch --source=. ./manage.py test --keepdb --with-xunit
+#         - coverage xml
+#         - python-codacy-coverage -r coverage.xml
+#         - flake8 --select E501,E265,E225 . --exit-zero --exclude .git,__pycache__,docs/source/conf.py,old,build,dist,./mixnet/migrations/,./base/migrations/,./store/migrations/,./census/migrations/,./voting/migrations/
+# #  - python ./decide/manage.py makemigrations
+# #  - python ./decide/manage.py migrate
+# #  - python ./decide/manage.py compilemessages
+# #  - python ./decide/manage.py test ./decide
         
-    - stage: "Deploy to github"
-      branches:
-        only:
-        - master
-      script:
-        - if [[ $TRAVIS_BRANCH == $RAMA_TRAVIS ]] && [[ $DEPLOY_TRAVIS == "1" ]]; then git archive --format zip --output ./$NOMBRE_ZIP.zip $RAMA_TRAVIS; echo "Zip generado correctamente."; fi
-      before_deploy:
-        - git config --local user.name $USER_TRAVIS
-        - git config --local user.email $EMAIL_TRAVIS
-        - export YEAR=`date +"%Y"`  
-        - export GIT_TAG=M$MILESTONE_TRAVIS-build.$TRAVIS_BUILD_NUMBER-$YEAR
-        - git tag -a $GIT_TAG -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
-      #  - cp travis_local_settings.py local_settings.py
-      #  - cd decide
-      #  - cp travis_settings.py settings.py
-      #  - python ./manage.py test --keepdb
-      deploy:
-          provider: releases
-          api-key:
-            secure: $TOKEN_TRAVIS
-          file: "./$NOMBRE_ZIP.zip"
-          on:
-            branch: $RAMA_TRAVIS
-            condition: $DEPLOY_TRAVIS = 1
-            tags: false
+#     - stage: "Deploy to github"
+#       branches:
+#         only:
+#         - master
+#       script:
+#         - if [[ $TRAVIS_BRANCH == $RAMA_TRAVIS ]] && [[ $DEPLOY_TRAVIS == "1" ]]; then git archive --format zip --output ./$NOMBRE_ZIP.zip $RAMA_TRAVIS; echo "Zip generado correctamente."; fi
+#       before_deploy:
+#         - git config --local user.name $USER_TRAVIS
+#         - git config --local user.email $EMAIL_TRAVIS
+#         - export YEAR=`date +"%Y"`  
+#         - export GIT_TAG=M$MILESTONE_TRAVIS-build.$TRAVIS_BUILD_NUMBER-$YEAR
+#         - git tag -a $GIT_TAG -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
+#       #  - cp travis_local_settings.py local_settings.py
+#       #  - cd decide
+#       #  - cp travis_settings.py settings.py
+#       #  - python ./manage.py test --keepdb
+#       deploy:
+#           provider: releases
+#           api-key:
+#             secure: $TOKEN_TRAVIS
+#           file: "./$NOMBRE_ZIP.zip"
+#           on:
+#             branch: $RAMA_TRAVIS
+#             condition: $DEPLOY_TRAVIS = 1
+#             tags: false
     - stage: "Deploy to Heroku"
       branches:
           only:
           - master
-      script:
-        - cd decide
+      # script:
+      #   - cd decide
+      #   - cp decide/settings.py ./local_settings.py
       before_deploy:
         - git config --local user.name $USER_TRAVIS
         - git config --local user.email $EMAIL_TRAVIS
