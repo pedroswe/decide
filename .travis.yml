@@ -82,12 +82,10 @@ jobs:
           - master
       script:
         - cd decide
-        - cp decide/settings.py ./local_settings.py
+        - cp travis_local_settings.py local_settings.py
       before_deploy:
         - git config --local user.name $USER_TRAVIS
         - git config --local user.email $EMAIL_TRAVIS
-        - cd decide
-        - cp decide/settings.py ./local_settings.py
       deploy:  
           provider: heroku
           app: $HEROKU_APP_NAME
