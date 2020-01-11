@@ -82,9 +82,7 @@ jobs:
           only:
           - master
       script:
-        - if [[ $TRAVIS_BRANCH == $RAMA_TRAVIS ]] && [[ $DEPLOY_TRAVIS == "1" ]];
-        
-       # - if [[ $TRAVIS_BRANCH == $RAMA_TRAVIS ]] && [[ $DEPLOY_TRAVIS == "1" ]]; then git archive --format zip --output ./$NOMBRE_ZIP.zip $RAMA_TRAVIS; echo "Zip generado correctamente."; fi
+        - cd decide
       before_deploy:
         - git config --local user.name $USER_TRAVIS
         - git config --local user.email $EMAIL_TRAVIS
