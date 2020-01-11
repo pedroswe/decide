@@ -32,26 +32,25 @@ env:
 
 jobs:
   include:
-#     - stage: "Running tests"
-#       install:
-#         - pip install -r requirements.txt
-#         - pip install codacy-coverage
-#         - pip install flake8
-#       before_script:
-#         - psql -U postgres -c "create user decide password 'decide'"
-#         - psql -U postgres -c "create database test_decide owner decide"
-#         - psql -U postgres -c "ALTER USER decide CREATEDB"
-#       script:
-#         - cd decide
-#         - coverage run --branch --source=. ./manage.py test --keepdb --with-xunit
-#         - coverage xml
-#         - python-codacy-coverage -r coverage.xml
-#         - flake8 --select E501,E265,E225 . --exit-zero --exclude .git,__pycache__,docs/source/conf.py,old,build,dist,./mixnet/migrations/,./base/migrations/,./store/migrations/,./census/migrations/,./voting/migrations/
+    - stage: "Running tests"
+      install:
+        - pip install -r requirements.txt
+        - pip install codacy-coverage
+        - pip install flake8
+      before_script:
+        - psql -U postgres -c "create user decide password 'decide'"
+        - psql -U postgres -c "create database test_decide owner decide"
+        - psql -U postgres -c "ALTER USER decide CREATEDB"
+      script:
+        - cd decide
+        - coverage run --branch --source=. ./manage.py test --keepdb --with-xunit
+        - coverage xml
+        - python-codacy-coverage -r coverage.xml
+        - flake8 --select E501,E265,E225 . --exit-zero --exclude .git,__pycache__,docs/source/conf.py,old,build,dist,./mixnet/migrations/,./base/migrations/,./store/migrations/,./census/migrations/,./voting/migrations/
 # #  - python ./decide/manage.py makemigrations
 # #  - python ./decide/manage.py migrate
 # #  - python ./decide/manage.py compilemessages
-# #  - python ./decide/manage.py test ./decide
-        
+# #  - python ./decide/manage.py test ./decide   
     - stage: "Deploy to github"
       branches:
         only:
