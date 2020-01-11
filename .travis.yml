@@ -82,12 +82,14 @@ jobs:
           only:
           - master
       script:
-        - cd decide
-        - cp decide/settings.py local_settings.py
+        - if [[ $TRAVIS_BRANCH == $RAMA_TRAVIS ]] && [[ $DEPLOY_TRAVIS == "1" ]];
+        
        # - if [[ $TRAVIS_BRANCH == $RAMA_TRAVIS ]] && [[ $DEPLOY_TRAVIS == "1" ]]; then git archive --format zip --output ./$NOMBRE_ZIP.zip $RAMA_TRAVIS; echo "Zip generado correctamente."; fi
       before_deploy:
         - git config --local user.name $USER_TRAVIS
         - git config --local user.email $EMAIL_TRAVIS
+        - cd decide
+        - cp decide/settings.py ./local_settings.py
       deploy:  
           provider: heroku
           app: $HEROKU_APP_NAME
@@ -97,6 +99,4 @@ jobs:
           strategy: git
           api_key:
             secure: $HEROKU_API_KEY
-          run:
-            - "python decide/manage.py collectstatic --noinput"
 
