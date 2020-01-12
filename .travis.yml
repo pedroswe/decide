@@ -83,8 +83,6 @@ jobs:
       script:
         - git checkout -qfb production
         - git status
-        - ls
-        - cat requirements.txt
         - cp -f travis_requirements.txt requirements.txt
         - rm -f travis_requirements.txt
         - cd decide
@@ -95,8 +93,7 @@ jobs:
         - git config --local user.name $USER_TRAVIS
         - git config --local user.email $EMAIL_TRAVIS
         - git status
-        - git add .
-        - git commit -m "Generated commit from TravisCI build $TRAVIS_BUILD_NUMBER"
+        - git commit -am "Generated commit from TravisCI build $TRAVIS_BUILD_NUMBER"
         - git push -q --force https://$TOKEN_TRAVIS@github.com/$USER_TRAVIS/decide_pruebas_ci.git production
     - stage: "deploy to heroku"
       if: (branch = production)
@@ -105,9 +102,6 @@ jobs:
       script:
         - git config --local user.name $USER_TRAVIS
         - git config --local user.email $EMAIL_TRAVIS
-        - git status
-        - git pull
-        - ls
       deploy:  
         provider: heroku
         api_key:
