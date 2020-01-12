@@ -91,12 +91,12 @@ jobs:
         - cd decide
         - cp -f travis_settings.py settings.py
         - rm -f travis_settings.py
-      before_deploy:
         - git config --local user.name $USER_TRAVIS
         - git config --local user.email $EMAIL_TRAVIS
         - git checkout -qfb heroku
+        - git status
         - git add .
-        - git commit --message "$TRAVIS_BUILD_NUMBER"
+        - git commit -m "Generated commit from TravisCI build $TRAVIS_BUILD_NUMBER"
         - git push https://git.heroku.com/$HEROKU_APP_NAME.git HEAD:refs/heads/$HEROKU_APP_NAME -f
       deploy:  
           provider: heroku
