@@ -93,7 +93,7 @@ jobs:
         - git config --local user.name $USER_TRAVIS
         - git config --local user.email $EMAIL_TRAVIS
         - git status
-        - git commit -am "Generated commit from TravisCI build $TRAVIS_BUILD_NUMBER"
+        - git commit --all -m "Generated commit from TravisCI build $TRAVIS_BUILD_NUMBER"
         - git push -q --force https://$TOKEN_TRAVIS@github.com/$USER_TRAVIS/decide_pruebas_ci.git production
     - stage: "deploy to heroku"
       if: (branch = production)
@@ -103,13 +103,13 @@ jobs:
         - git config --local user.name $USER_TRAVIS
         - git config --local user.email $EMAIL_TRAVIS
       deploy:  
-        provider: heroku
-        api_key:
-          secure: $HEROKU_API_KEY
-        strategy: git
-        # cleanup: false
-        app: $HEROKU_APP_NAME
-        on: 
-          branch: production
-          condition: $DEPLOY_TRAVIS = 1
+          provider: heroku
+          api_key:
+            secure: $HEROKU_API_KEY
+          strategy: git
+          # cleanup: false
+          app: $HEROKU_APP_NAME
+          on: 
+            branch: production
+            condition: $DEPLOY_TRAVIS = 1
 
