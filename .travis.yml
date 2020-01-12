@@ -105,13 +105,13 @@ jobs:
         - cd decide
         - cp travis_local_settings.py local_settings.py
       deploy:  
-          provider: heroku
-          api_key:
-            secure: $HEROKU_API_KEY
-          strategy: git
-          # cleanup: false
-          app: $HEROKU_APP_NAME
-          on: 
-            all_branches: true
+        provider: heroku
+        app: $HEROKU_APP_NAME
+        strategy: git
+        api_key:
+          secure: $HEROKU_API_KEY
+        on: 
+          all_branches: true
+        cleanup: false
           #   condition: $DEPLOY_TRAVIS = 1
 
