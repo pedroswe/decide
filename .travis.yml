@@ -111,7 +111,7 @@ jobs:
           strategy: git
           # cleanup: false
           app: $HEROKU_APP_NAME
-          # on: 
-          #   branch: production
+          on: 
+            all_branches: true
           #   condition: $DEPLOY_TRAVIS = 1
 
