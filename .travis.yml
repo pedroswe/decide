@@ -34,7 +34,7 @@ notifications:
 jobs:
   include:
     - stage: "running tests"
-      if: (branch != production) OR !(branch =~ ^M$MILESTONE_TRAVIS-build)
+      if: (branch != production) AND (NOT(branch =~ ^M$MILESTONE_TRAVIS-build))
       install:
         - pip install -r requirements.txt
         - pip install codacy-coverage
@@ -97,7 +97,7 @@ jobs:
         - git commit -m "Generated commit from TravisCI build $TRAVIS_BUILD_NUMBER"
         - git push -q --force https://$TOKEN_TRAVIS@github.com/$USER_TRAVIS/decide_pruebas_ci.git production
     - stage: "deploy to heroku"
-      if: (branch = production) AND !(branch =~ ^M$MILESTONE_TRAVIS-build)
+      if: (branch = production)
       install:
         - pip install -r requirements.txt
       script:
