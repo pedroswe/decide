@@ -28,6 +28,11 @@ addons:
 env:
   - DJANGO_SETTINGS_MODULE="decide.settings"
 
+notifications:
+  email: false  
+
+tags:
+  enabled: false
   
 
 jobs:
