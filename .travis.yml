@@ -34,6 +34,9 @@ notifications:
 jobs:
   include:
     - stage: "Running tests"
+      branches:
+        except:
+        - production
       install:
         - pip install -r requirements.txt
         - pip install codacy-coverage
@@ -77,7 +80,7 @@ jobs:
             branch: $RAMA_TRAVIS
             condition: $DEPLOY_TRAVIS = 1
             tags: false
-    - stage: "Deploy to Heroku"
+    - stage: "Deploy to production branch"
       branches:
           only:
           - master
@@ -99,6 +102,15 @@ jobs:
         - git add .
         - git commit -m "Generated commit from TravisCI build $TRAVIS_BUILD_NUMBER"
         - git push -q https://$TOKEN_TRAVIS@github.com/$USER_TRAVIS/decide_pruebas_ci.git production
+    - stage: "Deploy to Heroku"
+      branches:
+            only:
+            - production
+      install:
+        - pip install -r requirements.txt
+      script:
+        - git config --local user.name $USER_TRAVIS
+        - git config --local user.email $EMAIL_TRAVIS
       deploy:  
           provider: heroku
           app: $HEROKU_APP_NAME
@@ -108,7 +120,5 @@ jobs:
           strategy: git
           api_key:
             secure: $HEROKU_API_KEY
-          skip_cleanup: true
-          run:
-            - ls
+          cleanup: false
 
