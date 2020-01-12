@@ -102,6 +102,8 @@ jobs:
       script:
         - git config --local user.name $USER_TRAVIS
         - git config --local user.email $EMAIL_TRAVIS
+        - cd decide
+        - cp travis_local_settings.py local_settings.py
       deploy:  
           provider: heroku
           api_key:
@@ -109,7 +111,7 @@ jobs:
           strategy: git
           # cleanup: false
           app: $HEROKU_APP_NAME
-          on: 
-            branch: production
-            condition: $DEPLOY_TRAVIS = 1
+          # on: 
+          #   branch: production
+          #   condition: $DEPLOY_TRAVIS = 1
 
