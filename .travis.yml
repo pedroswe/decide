@@ -108,7 +108,7 @@ jobs:
           api_key:
             secure: $HEROKU_API_KEY
           strategy: git
-          cleanup: false
+          # cleanup: false
           app: $HEROKU_APP_NAME
           on: 
             branch: production
