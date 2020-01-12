@@ -34,7 +34,7 @@ notifications:
 jobs:
   include:
     - stage: "running tests"
-      if: branch != production
+      if: (branch != production) OR !(branch =~ ^M$MILESTONE_TRAVIS-build)
       install:
         - pip install -r requirements.txt
         - pip install codacy-coverage
@@ -54,9 +54,7 @@ jobs:
 # #  - python ./decide/manage.py compilemessages
 # #  - python ./decide/manage.py test ./decide   
     - stage: "deploy to github - release"
-      branches:
-        only: 
-          - master
+      if: (branch != production) OR !(branch =~ ^M$MILESTONE_TRAVIS-build)
       script:
         - if [[ $TRAVIS_BRANCH == $RAMA_TRAVIS ]] && [[ $DEPLOY_TRAVIS == "1" ]]; then git archive --format zip --output ./$NOMBRE_ZIP.zip $RAMA_TRAVIS; echo "Zip generado correctamente."; fi
       before_deploy:
@@ -79,9 +77,7 @@ jobs:
             condition: $DEPLOY_TRAVIS = 1
             tags: false
     - stage: "deploy to github - (production)"
-      branches:
-        only: 
-          - master
+      if: (branch = master) AND !(branch =~ ^M$MILESTONE_TRAVIS-build)
       install:
         - pip install -r travis_requirements.txt
       script:
@@ -101,9 +97,7 @@ jobs:
         - git commit -m "Generated commit from TravisCI build $TRAVIS_BUILD_NUMBER"
         - git push -q --force https://$TOKEN_TRAVIS@github.com/$USER_TRAVIS/decide_pruebas_ci.git production
     - stage: "deploy to heroku"
-      branches:
-        only:
-          - production
+      if: (branch = production= AND !(branch =~ ^M$MILESTONE_TRAVIS-build)
       install:
         - pip install -r requirements.txt
       script:
