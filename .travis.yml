@@ -98,17 +98,17 @@ jobs:
         - git status
         - git add .
         - git commit -m "Generated commit from TravisCI build $TRAVIS_BUILD_NUMBER"
-        # - git push https://git.heroku.com/$HEROKU_APP_NAME.git HEAD:refs/heads/$HEROKU_APP_NAME -f
+      #  - git push https://git.heroku.com/$HEROKU_APP_NAME.git HEAD:refs/heads/$HEROKU_APP_NAME -f
       deploy:  
           provider: heroku
           app: $HEROKU_APP_NAME
           on: 
             branch: $RAMA_TRAVIS
             condition: $DEPLOY_TRAVIS = 1
-          strategy: git
+        #  strategy: git
           api_key:
             secure: $HEROKU_API_KEY
-        # skip_cleanup: true
+          skip_cleanup: true
           run:
             - ls
 
