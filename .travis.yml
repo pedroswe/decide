@@ -55,7 +55,7 @@ jobs:
 # #  - python ./decide/manage.py migrate
 # #  - python ./decide/manage.py compilemessages
 # #  - python ./decide/manage.py test ./decide   
-    - stage: "Deploy to github"
+    - stage: "Deploy to Github - release"
       branches:
         only:
         - master
@@ -80,7 +80,7 @@ jobs:
             branch: $RAMA_TRAVIS
             condition: $DEPLOY_TRAVIS = 1
             tags: false
-    - stage: "Deploy to production branch"
+    - stage: "Deploy to Github - (production)"
       branches:
         only:
         - master
@@ -101,7 +101,7 @@ jobs:
         - git status
         - git add .
         - git commit -m "Generated commit from TravisCI build $TRAVIS_BUILD_NUMBER"
-        - git push -q https://$TOKEN_TRAVIS@github.com/$USER_TRAVIS/decide_pruebas_ci.git production
+        - git push -q --force https://$TOKEN_TRAVIS@github.com/$USER_TRAVIS/decide_pruebas_ci.git production
     - stage: "Deploy to Heroku"
       branches:
         only:
