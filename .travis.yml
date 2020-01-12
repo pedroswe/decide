@@ -76,7 +76,7 @@ jobs:
             branch: $RAMA_TRAVIS
             condition: $DEPLOY_TRAVIS = 1
             tags: false
-    - stage: "deploy to github - (production)"
+    - stage: "deploy to github - production"
       if: (branch = master) AND (NOT(branch =~ ^M$MILESTONE_TRAVIS-build))
       install:
         - pip install -r travis_requirements.txt
@@ -105,12 +105,12 @@ jobs:
         - git config --local user.email $EMAIL_TRAVIS
       deploy:  
           provider: heroku
+          api_key:
+            secure: $HEROKU_API_KEY
+          strategy: git
+          cleanup: false
           app: $HEROKU_APP_NAME
           on: 
             branch: production
             condition: $DEPLOY_TRAVIS = 1
-          strategy: git
-          # api_key:
-          #   secure: $HEROKU_API_KEY
-          cleanup: false
 
