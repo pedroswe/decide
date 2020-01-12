@@ -103,14 +103,16 @@ jobs:
       script:
         - git config --local user.name $USER_TRAVIS
         - git config --local user.email $EMAIL_TRAVIS
+        - git pull
+        - ls
       deploy:  
-          provider: heroku
-          api_key:
-            secure: $HEROKU_API_KEY
-          strategy: git
-          # cleanup: false
-          app: $HEROKU_APP_NAME
-          on: 
-            branch: production
-            condition: $DEPLOY_TRAVIS = 1
+        provider: heroku
+        api_key:
+          secure: $HEROKU_API_KEY
+        strategy: git
+        # cleanup: false
+        app: $HEROKU_APP_NAME
+          # on: 
+          #   branch: production
+          #   condition: $DEPLOY_TRAVIS = 1
 
