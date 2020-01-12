@@ -84,6 +84,8 @@ jobs:
       install:
         - pip install -r travis_requirements.txt
       script:
+        - git checkout -qfb heroku
+        - git status
         - cp -f travis_requirements.txt requirements.txt
         - rm -f travis_requirements.txt
         - cd decide
@@ -93,11 +95,10 @@ jobs:
         - rm -f travis_settings.py
         - git config --local user.name $USER_TRAVIS
         - git config --local user.email $EMAIL_TRAVIS
-        - git checkout -qfb heroku
         - git status
         - git add .
         - git commit -m "Generated commit from TravisCI build $TRAVIS_BUILD_NUMBER"
-        - git push https://git.heroku.com/$HEROKU_APP_NAME.git HEAD:refs/heads/$HEROKU_APP_NAME -f
+        # - git push https://git.heroku.com/$HEROKU_APP_NAME.git HEAD:refs/heads/$HEROKU_APP_NAME -f
       deploy:  
           provider: heroku
           app: $HEROKU_APP_NAME
