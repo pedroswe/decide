@@ -34,9 +34,7 @@ notifications:
 jobs:
   include:
     - stage: "running tests"
-      branches:
-        except:
-          - production
+      if: branch != production
       install:
         - pip install -r requirements.txt
         - pip install codacy-coverage
