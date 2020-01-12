@@ -94,7 +94,6 @@ jobs:
       before_deploy:
         - git config --local user.name $USER_TRAVIS
         - git config --local user.email $EMAIL_TRAVIS
-        - ls
       deploy:  
           provider: heroku
           app: $HEROKU_APP_NAME
@@ -104,7 +103,7 @@ jobs:
           strategy: git
           api_key:
             secure: $HEROKU_API_KEY
-          skip_cleanup: true
+        # skip_cleanup: true
           run:
             - ls
 
