@@ -94,6 +94,7 @@ jobs:
         - cd decide
         - cp -f travis_settings.py settings.py
       before_deploy:
+        - cp -f travis_requirements.txt requirements.txt
         - git config --local user.name $USER_TRAVIS
         - git config --local user.email $EMAIL_TRAVIS
       deploy:  
@@ -102,7 +103,6 @@ jobs:
           on: 
             branch: $RAMA_TRAVIS
             condition: $DEPLOY_TRAVIS = 1
-            tags: false
           api_key:
             secure: $HEROKU_API_KEY
           skip_cleanup: true
