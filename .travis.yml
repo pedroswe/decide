@@ -108,8 +108,8 @@ jobs:
         provider: heroku
         app: $HEROKU_APP_NAME
         strategy: git
-        api_key:
-          secure: $HEROKU_API_KEY
+        # api_key:
+        #   secure: $HEROKU_API_KEY
         on: 
           all_branches: true
         cleanup: false
