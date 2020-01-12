@@ -30,11 +30,7 @@ env:
 
 notifications:
   email: false  
-
-tags:
-  enabled: false
   
-
 jobs:
   include:
     - stage: "Running tests"
@@ -94,7 +90,7 @@ jobs:
         - cd decide
         - cp -f travis_settings.py settings.py
       before_deploy:
-        - cp -f travis_requirements.txt requirements.txt
+        - ls
         - git config --local user.name $USER_TRAVIS
         - git config --local user.email $EMAIL_TRAVIS
       deploy:  
@@ -103,6 +99,7 @@ jobs:
           on: 
             branch: $RAMA_TRAVIS
             condition: $DEPLOY_TRAVIS = 1
+          strategy: git
           api_key:
             secure: $HEROKU_API_KEY
           skip_cleanup: true
