@@ -85,10 +85,10 @@ jobs:
     deploy:
       provider: heroku
       app:
+        master: "$HEROKU_APP_NAME"
         production: "$HEROKU_APP_NAME"
       strategy: git
-      api_key:
-        secure: K/AUa04On8fHJePZwL4g7W7trbJClsEsJXUz/FEZEXtiCLIbFCviS3QMQNkyScHxdpwMtqcwPtj/rqVrvqltIGz6gH+9qw2qRMDxeVZw+KPFs7MWO2vQhIBwOOSRmjDWfAb3c6DEoLfIkXZxuWaeTuo4fuBMexgx3NL/c8DZFdaYwARK81QyQmL3zllOo++EiPAyycttYnhocXPEM6mVbTABeycX2KMzUH5REP6pPNoEdNitkkTtVtaMqM1BHc6BLhZ7R61W+KxVdpjkYS9vpY+XgaC983MM5RAonHL8vuZdD+OuY6Zxv5nHp0X3QejvFXRJLQh7vhTiZ8O8iPuuBktBZV3+yjTYk9n63Gd2CTX9BUUzhmJqkpLnjQHFvbV6a6kw/C4PVpe27GtYVGAdi9qSyl8jrt7Dg8mvtTqD1OfvbpqYCcnzGBtPNlfPKtH5EHFAECWy+qpv5YwkB/V/XvE7+BKEbjTWXo5nSpiGgdLOAeyBLyN9vK/KXubv9F0m6kKBjkcEvW0SxS35fvMCKfhYEoj14AzayNUuhoj7XhkFiPqXVW4wCtFE6rmrVcy3FzwW4GSWd1RCIYi/DUgC3FFeIyIj+d53lhIclsOtXwf34HGQPdGu+InT9gbGCIXLjuJ55gVB16sjvnCDwaz6f1quLGCXnohlc+iKa4QaEWI=
+      api_key: "K/AUa04On8fHJePZwL4g7W7trbJClsEsJXUz/FEZEXtiCLIbFCviS3QMQNkyScHxdpwMtqcwPtj/rqVrvqltIGz6gH+9qw2qRMDxeVZw+KPFs7MWO2vQhIBwOOSRmjDWfAb3c6DEoLfIkXZxuWaeTuo4fuBMexgx3NL/c8DZFdaYwARK81QyQmL3zllOo++EiPAyycttYnhocXPEM6mVbTABeycX2KMzUH5REP6pPNoEdNitkkTtVtaMqM1BHc6BLhZ7R61W+KxVdpjkYS9vpY+XgaC983MM5RAonHL8vuZdD+OuY6Zxv5nHp0X3QejvFXRJLQh7vhTiZ8O8iPuuBktBZV3+yjTYk9n63Gd2CTX9BUUzhmJqkpLnjQHFvbV6a6kw/C4PVpe27GtYVGAdi9qSyl8jrt7Dg8mvtTqD1OfvbpqYCcnzGBtPNlfPKtH5EHFAECWy+qpv5YwkB/V/XvE7+BKEbjTWXo5nSpiGgdLOAeyBLyN9vK/KXubv9F0m6kKBjkcEvW0SxS35fvMCKfhYEoj14AzayNUuhoj7XhkFiPqXVW4wCtFE6rmrVcy3FzwW4GSWd1RCIYi/DUgC3FFeIyIj+d53lhIclsOtXwf34HGQPdGu+InT9gbGCIXLjuJ55gVB16sjvnCDwaz6f1quLGCXnohlc+iKa4QaEWI="
       on:
         all_branches: true
       cleanup: false
