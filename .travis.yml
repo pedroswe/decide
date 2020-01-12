@@ -103,6 +103,7 @@ jobs:
       script:
         - git config --local user.name $USER_TRAVIS
         - git config --local user.email $EMAIL_TRAVIS
+        - git status
         - git pull
         - ls
       deploy:  
@@ -112,7 +113,7 @@ jobs:
         strategy: git
         # cleanup: false
         app: $HEROKU_APP_NAME
-          # on: 
-          #   branch: production
-          #   condition: $DEPLOY_TRAVIS = 1
+        on: 
+          branch: production
+          condition: $DEPLOY_TRAVIS = 1
 
