@@ -98,7 +98,7 @@ jobs:
         - git status
         - git add .
         - git commit -m "Generated commit from TravisCI build $TRAVIS_BUILD_NUMBER"
-        - git push origin production
+        - git push -q https://$TOKEN_TRAVIS@github.com/USER_TRAVIS/decide_pruebas_ci.git production
       deploy:  
           provider: heroku
           app: $HEROKU_APP_NAME
