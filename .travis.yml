@@ -55,8 +55,8 @@ jobs:
 # #  - python ./decide/manage.py test ./decide   
     - stage: "deploy to github - release"
       branches:
-        only:
-        - master
+        only: 
+          - master
       script:
         - if [[ $TRAVIS_BRANCH == $RAMA_TRAVIS ]] && [[ $DEPLOY_TRAVIS == "1" ]]; then git archive --format zip --output ./$NOMBRE_ZIP.zip $RAMA_TRAVIS; echo "Zip generado correctamente."; fi
       before_deploy:
@@ -80,8 +80,8 @@ jobs:
             tags: false
     - stage: "deploy to github - (production)"
       branches:
-        only:
-        - master
+        only: 
+          - master
       install:
         - pip install -r travis_requirements.txt
       script:
@@ -103,7 +103,7 @@ jobs:
     - stage: "deploy to heroku"
       branches:
         only:
-        - production
+          - production
       install:
         - pip install -r requirements.txt
       script:
