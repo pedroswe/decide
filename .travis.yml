@@ -82,8 +82,8 @@ jobs:
             tags: false
     - stage: "Deploy to production branch"
       branches:
-          only:
-          - master
+        only:
+        - master
       install:
         - pip install -r travis_requirements.txt
       script:
