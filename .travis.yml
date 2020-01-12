@@ -99,19 +99,25 @@ jobs:
       if: (branch = production)
       install:
         - pip install -r requirements.txt
+      before_script:
+        - psql -U postgres -c "create user decide password 'decide'"
+        - psql -U postgres -c "create database test_decide owner decide"
+        - psql -U postgres -c "ALTER USER decide CREATEDB"
       script:
         - git config --local user.name $USER_TRAVIS
         - git config --local user.email $EMAIL_TRAVIS
         - cd decide
         - cp travis_local_settings.py local_settings.py
       deploy:  
-        provider: heroku
-        app: $HEROKU_APP_NAME
-        strategy: git
-        # api_key:
-        #   secure: $HEROKU_API_KEY
-        on: 
-          all_branches: true
-        cleanup: false
+          provider: heroku
+          app: 
+            production: $HEROKU_APP_NAME
+          strategy: git
+          api_key:
+            production:
+              secure: $HEROKU_API_KEY
+          on: 
+            all_branches: true
+          cleanup: false
           #   condition: $DEPLOY_TRAVIS = 1
 
